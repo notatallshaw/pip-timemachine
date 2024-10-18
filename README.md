@@ -14,21 +14,19 @@ installing the same packages from a given date.
 
 ## Installation
 
-I reccomend install `pip-timemachine` as a tool, e.g. using
-[uv](https://github.com/astral-sh/uv?tab=readme-ov-file#uv):
+I reccomend install `pip-timemachine` as a tool, e.g.
 
+Using [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#uv):
 ```bash
 uv tool install pip-timemachine
 ```
 
 Or using [pipx](https://github.com/pypa/pipx?tab=readme-ov-file):
-
 ```bash
 pipx install pip-timemachine
 ```
 
 After installing simply run:
-
 ```bash
 pip-timemachine 2023-10-18T12:00:00
 ```
