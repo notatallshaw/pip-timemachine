@@ -46,3 +46,8 @@ pip-timemachine 2023-10-18T12:00:00
  * --port         INTEGER  [default: 8040]
  * --help                  Help
 ```
+
+# To Dos
+
+ * Support clients (e.g. pip) that do not support [PEP 691](https://peps.python.org/pep-0691/) or [PEP 700](https://peps.python.org/pep-0691/)
+ 
