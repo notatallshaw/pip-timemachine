@@ -1,4 +1,4 @@
-# Pip Time Machine
+# pip-timemachine
 
 A simple Python server that forwards requests to PyPI's Simple API,
 filters results based on a specific point in time, and returns the
