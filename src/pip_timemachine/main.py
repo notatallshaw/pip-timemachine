@@ -131,6 +131,10 @@ def run_server(moment: dt.datetime, index: str = INDEX, port: int = 8040):
     uvicorn.run("pip_timemachine.main:app", port=port)
 
 
+def main():
+    typer.run(run_server)
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    typer.run(run_server)
+    main()

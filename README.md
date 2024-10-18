@@ -35,6 +35,14 @@ pip-timemachine 2023-10-18T12:00:00
 
 ### CLI Options
 
-- `--moment`: The datetime (in RFC3339 format) up to which package files are returned.
-- `--index`: The PyPI index URL (default: `https://pypi.org/simple`).
-- `--port`: Server port (default: `8040`).
+```
+ Usage: pip-timemachine [OPTIONS] MOMENT:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
+ 
+ Arguments:
+ *    moment      MOMENT:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]  [default: None] [required]
+ 
+ Options : 
+ * --index        TEXT     [default: https://pypi.org/simple]
+ * --port         INTEGER  [default: 8040]
+ * --help                  Help
+```
