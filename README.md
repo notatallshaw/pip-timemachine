@@ -27,6 +27,8 @@ Or using [pipx](https://github.com/pypa/pipx?tab=readme-ov-file):
 pipx install pip-timemachine
 ```
 
+After installing simply run:
+
 ```bash
 pip-timemachine 2023-10-18T12:00:00
 ```
