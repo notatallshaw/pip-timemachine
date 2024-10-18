@@ -10,7 +10,7 @@ installing the same packages from a given date.
 ## Features
 
 - Filters package files by a specified datetime
-- Powered by [PEP 691](https://peps.python.org/pep-0691/) and PEP [PEP 700](https://peps.python.org/pep-0691/) to quickly filter packages after the given time
+- Powered by [PEP 691](https://peps.python.org/pep-0691/) and [PEP 700](https://peps.python.org/pep-0691/) to quickly filter packages after the given time
 
 ## Installation
 
@@ -39,7 +39,7 @@ pip-timemachine 2023-10-18T12:00:00
  Usage: pip-timemachine [OPTIONS] MOMENT:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
  
  Arguments:
- *    moment      MOMENT:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]  [default: None] [required]
+ * moment      MOMENT:[%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]  [default: None] [required]
  
  Options : 
  * --index        TEXT     [default: https://pypi.org/simple]
