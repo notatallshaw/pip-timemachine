@@ -11,7 +11,7 @@ installing the same packages from a given date.
 
 - Filters package files by a specified datetime
 - Powered by [PEP 691](https://peps.python.org/pep-0691/) and [PEP 700](https://peps.python.org/pep-0691/) to quickly filter packages after the given time
-- Can point to any simple index, not just PyPI
+- Can point to any simple index that supports PEP 691 and PEP 700, not just PyPI
 
 ## Installation
 
@@ -55,4 +55,4 @@ pip install requests --index http://127.0.0.1:8040
 
 # To Dos
 
- * Support clients (e.g. pip) that do not support [PEP 691](https://peps.python.org/pep-0691/) or [PEP 700](https://peps.python.org/pep-0691/)
+ * Support clients (e.g. pip) that do not support PEP 691 or PEP 700
