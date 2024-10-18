@@ -27,7 +27,11 @@ Or using [pipx](https://github.com/pypa/pipx?tab=readme-ov-file):
 pipx install pip-timemachine
 ```
 
-After installing simply run the server:
+## Usage
+
+### Run
+
+Once installed, run the server:
 ```bash
 pip-timemachine 2023-10-18T12:00:00
 ```
@@ -36,8 +40,6 @@ And then point pip (or any other installer) to use this server as an index:
 ```bash
 pip install requests --index http://127.0.0.1:8040
 ```
-
-## Usage
 
 ### CLI Options
 
