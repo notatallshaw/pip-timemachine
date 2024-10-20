@@ -1,5 +1,6 @@
 import datetime as dt
 import logging
+import threading
 from functools import cache
 
 import niquests
@@ -22,6 +23,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 # Global Vars
+UNICORN_SERVER: uvicorn.Server | None = None
 MOMENT: Instant = Instant.now()
 INDEX: str = "https://pypi.org/simple"
 REQUIRED_API_VERSION = (1, 1)
@@ -78,7 +80,23 @@ def filter_files_by_moment(files: list[dict]) -> tuple[list, dict]:
     return modified_files, modified_versions
 
 
-@app.get("/{package_name}")
+@app.get("/shutdown-pip-timemachine-server")
+async def shutdown_pip_timemachine_server():
+    """
+    Endpoint to gracefully shut down the FastAPI server.
+    """
+    def shutdown():
+        if UNICORN_SERVER:
+            UNICORN_SERVER.should_exit = True
+
+    # Run the shutdown in a separate thread to allow the response to return first
+    shutdown_thread = threading.Thread(target=shutdown)
+    shutdown_thread.start()
+
+    return JSONResponse({"message": "Server is shutting down."})
+
+
+@app.get("/simple/{package_name}")
 async def get_pypi_package_info(package_name: str, request: Request) -> Response:
     # Determine content type based on "Accept" header
     accept_header = request.headers.get("Accept")
@@ -125,10 +143,14 @@ async def get_pypi_package_info(package_name: str, request: Request) -> Response
 def run_server(moment: dt.datetime, index: str = INDEX, port: int = 8040):
     global MOMENT
     global INDEX
+    global UNICORN_SERVER
     MOMENT = Instant.from_py_datetime(moment.replace(tzinfo=dt.UTC))
     INDEX = index.rstrip("/")
 
-    uvicorn.run("pip_timemachine.main:app", port=port)
+    UNICORN_SERVER = uvicorn.Server(
+        uvicorn.Config("pip_timemachine.main:app", port=port)
+    )
+    UNICORN_SERVER.run()
 
 
 def main():

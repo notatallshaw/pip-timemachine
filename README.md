@@ -38,7 +38,7 @@ pip-timemachine 2023-10-18T12:00:00
 
 And then point pip (or any other installer) to use this server as an index:
 ```bash
-pip install requests --index http://127.0.0.1:8040
+pip install requests --index http://127.0.0.1:8040/simple
 ```
 
 ### CLI Options
