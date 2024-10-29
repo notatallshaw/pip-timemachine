@@ -1,12 +1,11 @@
 import datetime as dt
 import logging
-import threading
 from functools import cache
 
 import niquests
 import typer
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 from packaging.utils import (
     InvalidSdistFilename,
@@ -79,20 +78,18 @@ def filter_files_by_moment(files: list[dict]) -> tuple[list, dict]:
         modified_versions[version] = None
     return modified_files, modified_versions
 
+def initiate_shutdown():
+    logger.info("Gracefully shutting down")
+    if UNICORN_SERVER:
+        UNICORN_SERVER.should_exit = True
 
 @app.get("/shutdown-pip-timemachine-server")
-async def shutdown_pip_timemachine_server():
+async def shutdown_pip_timemachine_server(background_tasks: BackgroundTasks):
     """
     Endpoint to gracefully shut down the FastAPI server.
     """
-    def shutdown():
-        if UNICORN_SERVER:
-            UNICORN_SERVER.should_exit = True
-
     # Run the shutdown in a separate thread to allow the response to return first
-    shutdown_thread = threading.Thread(target=shutdown)
-    shutdown_thread.start()
-
+    background_tasks.add_task(initiate_shutdown)
     return JSONResponse({"message": "Server is shutting down."})
 
 
