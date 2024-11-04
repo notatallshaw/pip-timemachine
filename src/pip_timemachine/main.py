@@ -78,10 +78,12 @@ def filter_files_by_moment(files: list[dict]) -> tuple[list, dict]:
         modified_versions[version] = None
     return modified_files, modified_versions
 
+
 def initiate_shutdown():
     logger.info("Gracefully shutting down")
     if UNICORN_SERVER:
         UNICORN_SERVER.should_exit = True
+
 
 @app.get("/shutdown-pip-timemachine-server")
 async def shutdown_pip_timemachine_server(background_tasks: BackgroundTasks):
@@ -145,7 +147,9 @@ def run_server(moment: dt.datetime, index: str = INDEX, port: int = 8040):
     INDEX = index.rstrip("/")
 
     UNICORN_SERVER = uvicorn.Server(
-        uvicorn.Config("pip_timemachine.main:app", port=port)
+        uvicorn.Config(
+            "pip_timemachine.main:app", port=port, workers=4, timeout_keep_alive=15
+        )
     )
     UNICORN_SERVER.run()
 
