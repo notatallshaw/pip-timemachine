@@ -48,7 +48,7 @@ def test_filter_accept_header_invalid():
 def test_filter_files_by_moment():
     files = [
         {"filename": "example_pkg-0.1.0.tar.gz", "upload-time": "2023-10-18T12:00:00Z"},
-        {"filename": "example_pkg-0.2.0.tar.gz", "upload-time": "2025-10-18T12:00:00Z"},
+        {"filename": "example_pkg-0.2.0.tar.gz", "upload-time": "2050-10-18T12:00:00Z"},
     ]
     modified_files, modified_versions = filter_files_by_moment(files)
     assert len(modified_files) == 1
