@@ -1,5 +1,6 @@
 import datetime as dt
 import logging
+from datetime import timezone
 from functools import cache
 
 import niquests
@@ -68,7 +69,7 @@ def filter_files_by_moment(files: list[dict]) -> tuple[list, dict]:
     modified_files = []
     modified_versions: dict[str, None] = {}
     for file in files:
-        if not Instant.parse_rfc3339(file["upload-time"]) <= MOMENT:
+        if not Instant.parse_iso(file["upload-time"]) <= MOMENT:
             continue
         file_name = file["filename"]
         version = parse_version_from_filename(file_name)
@@ -143,7 +144,7 @@ def run_server(moment: dt.datetime, index: str = INDEX, port: int = 8040):
     global MOMENT
     global INDEX
     global UNICORN_SERVER
-    MOMENT = Instant.from_py_datetime(moment.replace(tzinfo=dt.UTC))
+    MOMENT = Instant.from_py_datetime(moment.replace(tzinfo=timezone.utc))
     INDEX = index.rstrip("/")
 
     UNICORN_SERVER = uvicorn.Server(

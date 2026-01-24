@@ -15,7 +15,7 @@ dependencies = [
     "uvicorn>=0.32.0",
     "uvloop>=0.21.0",
     "werkzeug>=3.0.4",
-    "whenever~=0.6.9",
+    "whenever~=0.9.5",
 ]
 
 [project.scripts]
@@ -25,8 +25,8 @@ pip-timemachine = "pip_timemachine.main:main"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "pytest>=8.3.3",
     "ruff>=0.7.0",
 ]
